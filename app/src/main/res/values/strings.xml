@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">AbletonController</string>
+    <string name="switch_disconnect_text">Disconnected</string>
+    <string name="switch_connect_text">Connecting...</string>
+    <string name="switch_socket">Connect</string>
+</resources>
