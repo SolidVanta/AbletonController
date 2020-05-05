@@ -41,8 +41,10 @@
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/button_stop"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_play" />
+        app:layout_constraintTop_toBottomOf="@+id/button_play"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/button_play"
@@ -74,4 +76,33 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.467"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/button_record"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="72dp"
+        android:layout_marginLeft="72dp"
+        android:layout_marginBottom="8dp"
+        android:background="@android:color/holo_red_dark"
+        android:onClick="sendRecord"
+        android:text="Button"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toTopOf="@+id/button_stop"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="Record" />
+
+    <Button
+        android:id="@+id/button_cue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:background="@color/colorPrimary"
+        android:onClick="sendCreateCue"
+        android:text="Cue"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toTopOf="@+id/button_stop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.668"
+        app:layout_constraintStart_toEndOf="@+id/button_record" />
 </androidx.constraintlayout.widget.ConstraintLayout>

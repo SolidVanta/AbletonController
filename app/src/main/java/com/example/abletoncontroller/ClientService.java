@@ -26,7 +26,6 @@ public class ClientService extends Service {
     private static String host = "192.168.1.227";
     private static final int port = 3490;
     private final IBinder binder = new LocalBinder();
-    private SocketAddress sockaddr;
     private int threadID;
     private OutputStream oS;
     private DataOutputStream doS;
@@ -73,6 +72,12 @@ public class ClientService extends Service {
                     break;
                 case 2:
                     sendMsgToServer("Stop in the name of love!");
+                    break;
+                case 3:
+                    sendMsgToServer("Recording that lovely voice!");
+                    break;
+                case 4:
+                    sendMsgToServer("Ooh that's a sweet spot!");
                     break;
                 case 100:
                     try {
@@ -132,9 +137,7 @@ public class ClientService extends Service {
     }
     private void send(OutputStream oS, DataOutputStream doS, byte[] bytes) throws IOException {
         doS.write(bytes, 0, bytes.length);
-        doS.flush(); // send the message
-        //dataOutputStream.close(); // close the output stream when we're done.
-        //Log.d("tag", "Closing socket and terminating program.");
+        doS.flush(); // send the message;
     }
 
     public void onCreate() {
@@ -152,7 +155,6 @@ public class ClientService extends Service {
                 try {
                     sock = new Socket(host, port);
                     sock.setKeepAlive(true);
-                    sockaddr = sock.getRemoteSocketAddress();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

@@ -742,7 +742,9 @@ id beginning
 id blocking
 id bottom
 id buttonPanel
+id button_cue
 id button_play
+id button_record
 id button_stop
 id center_vertical
 id chains

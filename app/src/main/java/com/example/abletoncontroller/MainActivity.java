@@ -20,10 +20,8 @@ import java.net.Socket;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Socket s;
     private Switch socketSwitch;
     private Intent intent;
-    private Thread sockThread;
     ClientService mService;
     boolean mBound = false;
 
@@ -66,46 +64,34 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         socketSwitch = (Switch) findViewById(R.id.switch_sock);
-        Boolean switchState = socketSwitch.isChecked();
         intent = new Intent(this, ClientService.class);
         startService(intent);
         bindService(intent, connection, Context.BIND_AUTO_CREATE);
     }
 
-    private void tearDown(){
+    private void tearDown() {
         mService.sendMessage(100);
         unbindService(connection);
-        //stopService(intent);
         mBound = false;
         socketSwitch.setText(R.string.switch_disconnect_text);
-        Toast.makeText(this,"Tearing down", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Tearing down", Toast.LENGTH_SHORT).show();
     }
 
     public void connectSock(View view) throws IOException {
-        if (socketSwitch.isChecked() && !mService.isConnected()) {
-            /**
-             * calls SocketService onStartCommand() but this would run on the main thread or UIthread.
-             * This is fine but not when using sockets.
-             */
-            socketSwitch.setChecked(false);
-            //tearDown();
-        } else if (socketSwitch.isChecked()) {
+        if (socketSwitch.isChecked()) {
             intent = new Intent(this, ClientService.class);
             startService(intent);
             bindService(intent, connection, Context.BIND_AUTO_CREATE);
 
-        } else {
-           socketSwitch.setChecked(false);
-           tearDown();
+        } else if (!socketSwitch.isChecked()) {
+            tearDown();
         }
     }
 
     private void send(int msg) {
         if (mBound && socketSwitch.isChecked() && mService.isConnected()) {
             mService.sendMessage(msg);
-            Log.d("tag", "Sending play message " + mBound);
         } else {
-            Log.d("tag", "Not bound to any service connection " + mBound);
             return;
         }
     }
